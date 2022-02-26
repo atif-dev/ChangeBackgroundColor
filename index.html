@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Change Background Color</title>
+
+	<style type="text/css">
+
+		#container{
+
+			height:100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+ 		.manual:hover, .manual:focus {
+	 		box-shadow: inset 0 0 0 2em var(--hover);
+		}
+ 		.auto1:hover, .auto1:focus {
+	 		animation: auto1 1s;
+	 		box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+		}
+ 		@keyframes auto1 {
+	 		0% {
+		 		box-shadow: 0 0 0 0 var(--hover);
+			}
+		}
+ 		#stop:hover, #stop:focus {
+	 		box-shadow: inset -7.5em 0 0 0 var(--hover), inset 7.5em 0 0 0 var(--hover);
+		}
+ 		
+	 	.manual {
+		 	--color: #a972cb;
+			 --hover: green;
+		}
+	 	.auto1 {
+		 	--color: #ef6eae;
+		 	--hover: indigo;
+		}
+	 	#stop {
+
+		 --color: red;
+		 --hover: red;
+		}
+
+
+	 	button {
+		 	color: var(--color);
+		 	transition: 0.25s;
+		}
+	 	button:hover, button:focus {
+		 	border-color: var(--hover);
+		 	color: #fff;
+		}
+	 
+	 	button {
+		 	background: none;
+		 	border: 2px solid;
+		 	font: inherit;
+		 	line-height: 1;
+		 	margin: 0.5em;
+		 	padding: 1em 2em;
+		}
+	 	body {
+		 
+		 background: #17181c;
+		 font: 300 1em 'Fira Sans', sans-serif;
+		 }
+		img{
+			position: relative;
+			left: 95%;
+			top: -75px;
+			cursor: pointer;
+		}
+	 
+</style>
+
+</head>
+<body>
+	
+	<div id="container">
+
+	<button class="manual" onclick="manualChange()">Manual</button>
+	<button class="auto1" onclick="autoChange()">Automated</button>
+	<button id="stop" onclick="stop()">Stop Automated</button>
+
+	</div>
+	<img title="Click '?' for Help" src="help.png" onclick="window.open('help.html');">
+</body>
+
+<script type="text/javascript">
+	
+
+	function manualChange(){
+			const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  			document.body.style.backgroundColor = "#" + randomColor;
+  			
+	}
+
+	var interval;
+
+	function autoChange(){
+
+		interval = setInterval(manualChange, 2000);
+  		
+	}
+
+	function stop(){
+		clearInterval(interval);
+	}
+
+</script>
+
+</html>
